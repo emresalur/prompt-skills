@@ -10,6 +10,26 @@ Analyzes your most recent prompt for clarity, ambiguity, missing context, and sc
 ### `/session-review`
 Reviews your entire conversation at the end of a session. Scores your overall communication, highlights what worked, what didn't, and identifies recurring patterns across sessions.
 
+## Example output
+
+Running `/prompt-review` on the prompt: *"fix the bug in the auth code"*
+
+> **Score: 2/10**
+>
+> **Verdict** — Too vague to act on without guessing which file, which bug, and what "fix" means.
+>
+> **Problems found**
+> - *Vague reference*: "the auth code" — which file, which function?
+> - *Missing context*: which bug? No symptom, no stack trace, no repro step.
+> - *No success criteria*: how would Claude know the fix worked?
+> - *Buried intent*: is the goal investigate-then-fix, or patch-and-go?
+>
+> **Rewrite**
+> Investigate the 401 error in `auth/login.ts:handleLogin`. Valid credentials are rejected when the email contains a `+`. Fix the bug and add a test covering the `+` case.
+>
+> **Pattern to remember**
+> When you want a fix, start with the symptom + the file location.
+
 ## Installation
 
 Copy the skill folders into your Claude Code skills directory:
